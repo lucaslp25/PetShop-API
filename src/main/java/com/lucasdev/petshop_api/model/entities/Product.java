@@ -37,4 +37,13 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product")
     private List<OrderItem> orderItems = new ArrayList<>();
+
+    @Builder
+    public Product(Long id, String name, String description, BigDecimal price, Integer stock) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+    }
 }

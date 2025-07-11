@@ -2,13 +2,16 @@ package com.lucasdev.petshop_api.configuration;
 
 import com.lucasdev.petshop_api.model.entities.Customer;
 import com.lucasdev.petshop_api.model.entities.Pet;
+import com.lucasdev.petshop_api.model.entities.Product;
 import com.lucasdev.petshop_api.model.enums.PetType;
 import com.lucasdev.petshop_api.repositories.CustomerRepository;
 import com.lucasdev.petshop_api.repositories.PetRepository;
+import com.lucasdev.petshop_api.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Configuration
@@ -20,12 +23,16 @@ public class DataBasePopulation implements CommandLineRunner {
     @Autowired
     private PetRepository petRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
 
         customerRepository.deleteAll();
         petRepository.deleteAll();
+        productRepository.deleteAll();
 
         Customer customer1 = new Customer(null, "Lucas", "lucas@gmail.com", "99999999999", "12345678910");
 
@@ -38,5 +45,11 @@ public class DataBasePopulation implements CommandLineRunner {
         Pet pet3 = new Pet(null, "Ruby", PetType.DOG, customer2);
 
         petRepository.saveAll(List.of(pet1, pet2, pet3));
+
+        Product p1 = new Product(null, "Golden Dog Food", "Golden brand dog food for adult dogs, chicken and rice flavor, 15kg bag.", new BigDecimal("150.00"), 50);
+        Product p2 = new Product(null, "Durable Chew Toy", "Durable chew toy for medium-sized dogs, helps with dental hygiene.", new BigDecimal("35.50"), 100);
+        Product p3 = new Product(null, "Flea & Tick Collar", "Collar for dogs and cats, provides up to 8 months of protection against fleas and ticks.", new BigDecimal("89.90"), 30);
+
+        productRepository.saveAll(List.of(p1, p2, p3) );
     }
 }
