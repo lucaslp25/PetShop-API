@@ -41,4 +41,12 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "owner")
     private Set<Pet> pets = new HashSet<>();
+
+    public Customer(Long id, String name, String email, String phone, String cpf) {
+        this.id = id;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+    }
 }

@@ -8,11 +8,12 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "tb_pet")
+@AllArgsConstructor
 public class Pet implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,6 +22,9 @@ public class Pet implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PetType type;
 
     @ManyToOne
