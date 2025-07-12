@@ -1,12 +1,12 @@
 package com.lucasdev.petshop_api.model.entities;
 
-import com.lucasdev.petshop_api.model.enums.PaymentMode;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +28,8 @@ public class Order implements Serializable {
     @NotNull(message = "The field 'totalPrice' cannot be empty.")
     private BigDecimal totalPrice;
 
+    private LocalDateTime orderDate;
+
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private Payment payment;
 
@@ -40,8 +42,11 @@ public class Order implements Serializable {
             payment.setOrder(this);
             payment.setAmount(this.totalPrice);
         }
-
         this.payment = payment;
     }
 
+    @PrePersist
+    protected void onCreate() {
+        this.orderDate = LocalDateTime.now();
+    }
 }

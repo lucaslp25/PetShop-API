@@ -41,7 +41,6 @@ public class ProductService {
         return entities.stream().map(ProductResponseDTO::new).collect(Collectors.toList());
     }
 
-
     @Transactional(readOnly = true)
     public ProductResponseDTO findById(Long id){
 
@@ -82,4 +81,11 @@ public class ProductService {
         return new ProductResponseDTO(entity);
     }
 
+    @Transactional(readOnly = true)
+    protected Product findEntityById(Long id){
+
+        Product entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
+
+        return entity;
+    }
 }
