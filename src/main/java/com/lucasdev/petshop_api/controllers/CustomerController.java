@@ -62,7 +62,7 @@ public class CustomerController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<CustomerResponseDTO> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id){
 
         service.deleteById(id);
         return ResponseEntity.noContent().build(); //code 204

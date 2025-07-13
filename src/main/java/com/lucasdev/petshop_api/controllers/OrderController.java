@@ -30,7 +30,7 @@ public class OrderController {
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.id()).toUri();
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.created(uri).body(response);
     }
 
 }

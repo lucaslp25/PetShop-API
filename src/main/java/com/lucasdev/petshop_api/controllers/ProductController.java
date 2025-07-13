@@ -54,9 +54,7 @@ public class ProductController {
 
         ProductResponseDTO dto = productService.updateStock(id, quantity);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.id()).toUri();
-
-        return ResponseEntity.created(uri).body(dto); //code201
+        return ResponseEntity.ok().body(dto); //code201
     }
 
     @PatchMapping(value = "/{id}")
