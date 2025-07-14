@@ -24,7 +24,8 @@ public record ProductCreateDTO(
         Integer stock
 ) {
 
-    public ProductCreateDTO(Product entity){
+    public ProductCreateDTO(Product entity) {
         this(entity.getName(), entity.getDescription(), entity.getPrice(), entity.getStock());
     }
 }
+

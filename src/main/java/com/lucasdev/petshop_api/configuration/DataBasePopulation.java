@@ -9,9 +9,13 @@ import com.lucasdev.petshop_api.repositories.CustomerRepository;
 import com.lucasdev.petshop_api.repositories.EmployeeRepository;
 import com.lucasdev.petshop_api.repositories.PetRepository;
 import com.lucasdev.petshop_api.repositories.ProductRepository;
+import com.lucasdev.petshop_api.security.model.User;
+import com.lucasdev.petshop_api.security.model.UserRole;
+import com.lucasdev.petshop_api.security.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,6 +35,12 @@ public class DataBasePopulation implements CommandLineRunner {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -39,6 +49,7 @@ public class DataBasePopulation implements CommandLineRunner {
         petRepository.deleteAll();
         productRepository.deleteAll();
         employeeRepository.deleteAll();
+        userRepository.deleteAll();
 
         Customer customer1 = new Customer(null, "Lucas", "lucas@gmail.com", "99999999999", "12345678910");
 
@@ -62,5 +73,14 @@ public class DataBasePopulation implements CommandLineRunner {
         Employee employee2 = new Employee(null, "Bob", "bob@email.com", "99887766555", "55566677788");
 
         employeeRepository.saveAll(List.of(employee1, employee2));
+
+        String password = "8118";
+        String pass = passwordEncoder.encode(password);
+
+        User u1 = new User("lp1", pass, UserRole.EMPLOYEE);
+        User U2 = new User("lp2", pass, UserRole.CUSTOMER);
+
+        userRepository.saveAll(List.of(u1, U2));
+
     }
 }
