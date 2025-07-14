@@ -45,21 +45,40 @@ public class DataBasePopulation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        customerRepository.deleteAll();
         petRepository.deleteAll();
         productRepository.deleteAll();
-        employeeRepository.deleteAll();
         userRepository.deleteAll();
 
+        //new way than approached
+
+        String password = "8118";
+        String pass = passwordEncoder.encode(password);
+
+
+        User userEmployee1 = new User(null, "alice.employee", pass, UserRole.EMPLOYEE, null, null);
+        Employee employee1 = new Employee(null, "Alice", "alice@email.com", "98765432100", "11122233344");
+        userEmployee1.setEmployeeProfile(employee1);
+
+        User userEmployee2 = new User(null, "bob.employee", pass, UserRole.EMPLOYEE, null, null);
+        Employee employee2 = new Employee(null, "Bob", "bob@email.com", "99887766555", "55566677788");
+        userEmployee2.setEmployeeProfile(employee2);
+
+        User userCustomer1 = new User(null, "lucas.customer", pass, UserRole.CUSTOMER, null, null);
         Customer customer1 = new Customer(null, "Lucas", "lucas@gmail.com", "99999999999", "12345678910");
+        userCustomer1.setCustomerProfile(customer1);
 
+        User userCustomer2 = new User(null, "fulano.customer", pass, UserRole.CUSTOMER, null, null);
         Customer customer2 = new Customer(null, "Fulano", "fulano@gmail.com", "51999999999", "12345678911");
+        userCustomer2.setCustomerProfile(customer2);
 
-        customerRepository.saveAll(List.of(customer1, customer2));
+        userRepository.saveAll(List.of(userEmployee1, userEmployee2, userCustomer1, userCustomer2));
 
-        Pet pet1 = new Pet(null, "Mel", PetType.DOG, customer1);
-        Pet pet2 = new Pet(null, "Rex", PetType.DOG, customer1);
-        Pet pet3 = new Pet(null, "Ruby", PetType.DOG, customer2);
+
+        //a little change here too
+
+        Pet pet1 = new Pet(null, "Mel", PetType.DOG, userCustomer1.getCustomerProfile());
+        Pet pet2 = new Pet(null, "Rex", PetType.DOG, userCustomer1.getCustomerProfile());
+        Pet pet3 = new Pet(null, "Ruby", PetType.DOG, userCustomer2.getCustomerProfile());
 
         petRepository.saveAll(List.of(pet1, pet2, pet3));
 
@@ -68,19 +87,6 @@ public class DataBasePopulation implements CommandLineRunner {
         Product p3 = new Product(null, "Flea & Tick Collar", "Collar for dogs and cats, provides up to 8 months of protection against fleas and ticks.", new BigDecimal("89.90"), 30);
 
         productRepository.saveAll(List.of(p1, p2, p3) );
-
-        Employee employee1 = new Employee(null, "Alice", "alice@email.com", "98765432100", "11122233344");
-        Employee employee2 = new Employee(null, "Bob", "bob@email.com", "99887766555", "55566677788");
-
-        employeeRepository.saveAll(List.of(employee1, employee2));
-
-        String password = "8118";
-        String pass = passwordEncoder.encode(password);
-
-        User u1 = new User("lp1", pass, UserRole.EMPLOYEE);
-        User U2 = new User("lp2", pass, UserRole.CUSTOMER);
-
-        userRepository.saveAll(List.of(u1, U2));
 
     }
 }

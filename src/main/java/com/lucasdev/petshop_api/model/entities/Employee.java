@@ -1,5 +1,6 @@
 package com.lucasdev.petshop_api.model.entities;
 
+import com.lucasdev.petshop_api.security.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -38,4 +39,17 @@ public class Employee implements Serializable {
     @NotBlank(message = "The field 'cpf' cannot be empty.")
     @Pattern(regexp = "(^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$)|(^\\d{11}$)", message = "Invalid CPF format.")
     private String cpf;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @MapsId
+    private User user;
+
+    public Employee(Long id, String name, String email, String phone, String cpf) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.cpf = cpf;
+    }
 }

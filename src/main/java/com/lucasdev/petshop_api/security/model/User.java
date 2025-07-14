@@ -1,5 +1,7 @@
 package com.lucasdev.petshop_api.security.model;
 
+import com.lucasdev.petshop_api.model.entities.Customer;
+import com.lucasdev.petshop_api.model.entities.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,8 +23,8 @@ public class User implements Serializable, UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID) //better for Strings
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String login;
 
@@ -31,11 +33,34 @@ public class User implements Serializable, UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Customer customerProfile;
+
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Employee employeeProfile;
+
     @Builder
     public User(String login, String password, UserRole role) {
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+
+
+    public void setCustomerProfile(Customer customerProfile) {
+        this.customerProfile = customerProfile;
+        if (customerProfile != null) {
+            customerProfile.setUser(this);
+        }
+    }
+
+    public void setEmployeeProfile(Employee employeeProfile) {
+        this.employeeProfile = employeeProfile;
+        if (employeeProfile != null) {
+            employeeProfile.setUser(this);
+        }
     }
 
     @Override

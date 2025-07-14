@@ -1,5 +1,6 @@
 package com.lucasdev.petshop_api.model.entities;
 
+import com.lucasdev.petshop_api.security.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -42,11 +43,26 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "owner")
     private Set<Pet> pets = new HashSet<>();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @MapsId  //Say to jpa than this id is the same of User ID.
+    private User user; //turning the User the center of my system
+
     public Customer(Long id, String name, String email, String phone, String cpf) {
         this.id = id;
         this.cpf = cpf;
         this.phone = phone;
         this.email = email;
         this.name = name;
+    }
+
+    @Builder
+    public Customer(Long id, String name, String email, String phone, String cpf, User user) {
+        this.id = id;
+        this.cpf = cpf;
+        this.phone = phone;
+        this.email = email;
+        this.name = name;
+        this.user = user;
     }
 }
