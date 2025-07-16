@@ -37,6 +37,6 @@ public class Payment implements Serializable {
     private PaymentStatus status;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
-    private Order order;
+    @JoinColumn(name = "sale_id", referencedColumnName = "id")
+    private Sale sale;
 }

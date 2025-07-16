@@ -51,6 +51,7 @@ public class PetShopSecurityConfiguration {
 
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/sales").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "/products").hasRole("EMPLOYEE").requestMatchers(HttpMethod.DELETE, "/products").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.PUT, "/products").hasRole("EMPLOYEE")
 

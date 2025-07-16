@@ -1,14 +1,9 @@
 package com.lucasdev.petshop_api.configuration;
 
-import com.lucasdev.petshop_api.model.entities.Customer;
-import com.lucasdev.petshop_api.model.entities.Employee;
-import com.lucasdev.petshop_api.model.entities.Pet;
-import com.lucasdev.petshop_api.model.entities.Product;
+import com.lucasdev.petshop_api.model.entities.*;
 import com.lucasdev.petshop_api.model.enums.PetType;
-import com.lucasdev.petshop_api.repositories.CustomerRepository;
-import com.lucasdev.petshop_api.repositories.EmployeeRepository;
-import com.lucasdev.petshop_api.repositories.PetRepository;
-import com.lucasdev.petshop_api.repositories.ProductRepository;
+import com.lucasdev.petshop_api.model.enums.ServiceType;
+import com.lucasdev.petshop_api.repositories.*;
 import com.lucasdev.petshop_api.security.model.User;
 import com.lucasdev.petshop_api.security.model.UserRole;
 import com.lucasdev.petshop_api.security.repositories.UserRepository;
@@ -41,6 +36,9 @@ public class DataBasePopulation implements CommandLineRunner {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private PetShopServiceRepository petShopServiceRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -48,6 +46,7 @@ public class DataBasePopulation implements CommandLineRunner {
         petRepository.deleteAll();
         productRepository.deleteAll();
         userRepository.deleteAll();
+        petShopServiceRepository.deleteAll();
 
         //new way than approached
 
@@ -88,5 +87,10 @@ public class DataBasePopulation implements CommandLineRunner {
 
         productRepository.saveAll(List.of(p1, p2, p3) );
 
+        PetShopService pss = new PetShopService(null, "Fast Shower", ServiceType.BATH_AND_GROOMING, BigDecimal.valueOf(158.80));
+
+        petShopServiceRepository.saveAll(List.of(pss));
+
     }
+
 }

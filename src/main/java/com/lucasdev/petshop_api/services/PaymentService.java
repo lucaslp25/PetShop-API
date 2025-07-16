@@ -2,6 +2,7 @@ package com.lucasdev.petshop_api.services;
 
 import com.lucasdev.petshop_api.model.entities.Order;
 import com.lucasdev.petshop_api.model.entities.Payment;
+import com.lucasdev.petshop_api.model.entities.Sale;
 import com.lucasdev.petshop_api.model.enums.PaymentStatus;
 import com.lucasdev.petshop_api.repositories.PaymentRepository;
 import com.lucasdev.petshop_api.services.payment.PaymentGateway;
@@ -21,9 +22,9 @@ public class PaymentService {
     }
 
     @Transactional
-    public PaymentResultDTO executePaymentForOrder(Order order){
+    public PaymentResultDTO executePaymentForOrder(Sale sale){
 
-        Payment payment = order.getPayment(); //get the payment info
+        Payment payment = sale.getPayment(); //get the payment info
 
         payment.setStatus(PaymentStatus.PENDING); //put in pending for this moment
 

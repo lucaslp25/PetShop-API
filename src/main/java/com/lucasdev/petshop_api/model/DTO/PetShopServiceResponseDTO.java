@@ -12,3 +12,4 @@ public record PetShopServiceResponseDTO(Long id, String name, ServiceType servic
         this(entity.getId(), entity.getName(), entity.getServiceType(), entity.getPrice());
     }
 }
+

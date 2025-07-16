@@ -77,6 +77,14 @@ public class PetService {
         petRepository.deleteById(id);
     }
 
+    @Transactional(readOnly = true)
+    public Pet findEntityById(Long id) {
+
+        Pet pet = petRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Pet with id " + id + " not found"));
+
+        return pet;
+    }
+
 
 
 }

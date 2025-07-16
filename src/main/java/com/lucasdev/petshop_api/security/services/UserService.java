@@ -1,12 +1,10 @@
 package com.lucasdev.petshop_api.security.services;
 
 
+import com.lucasdev.petshop_api.exceptions.ResourceNotFoundException;
 import com.lucasdev.petshop_api.security.exceptions.PetShopLoginException;
 import com.lucasdev.petshop_api.security.exceptions.PetShopSecurityException;
-import com.lucasdev.petshop_api.security.model.DTO.RegisterResponseDTO;
-import com.lucasdev.petshop_api.security.model.DTO.TokenDTO;
-import com.lucasdev.petshop_api.security.model.DTO.UserLoginDTO;
-import com.lucasdev.petshop_api.security.model.DTO.UserRegisterDTO;
+import com.lucasdev.petshop_api.security.model.DTO.*;
 import com.lucasdev.petshop_api.security.model.User;
 import com.lucasdev.petshop_api.security.model.UserRole;
 import com.lucasdev.petshop_api.security.repositories.UserRepository;
@@ -67,5 +65,14 @@ public class UserService {
         String token = tokenService.generateToken((User) auth.getPrincipal());
 
         return new TokenDTO(token);
+    }
+
+    @Transactional(readOnly = true)
+    public User findUserByLogin(String login){
+
+        User user = repository.findUserByLogin(login).orElseThrow(() ->
+                new ResourceNotFoundException("Not found user with login: " + login));
+
+        return user;
     }
 }

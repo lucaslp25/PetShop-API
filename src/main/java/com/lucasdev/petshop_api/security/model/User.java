@@ -33,10 +33,9 @@ public class User implements Serializable, UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-
+    //here happen´s the magic os the program!!!
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Customer customerProfile;
-
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Employee employeeProfile;

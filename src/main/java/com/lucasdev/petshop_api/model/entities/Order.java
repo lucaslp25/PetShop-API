@@ -30,20 +30,12 @@ public class Order implements Serializable {
 
     private LocalDateTime orderDate;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private Payment payment;
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<OrderItem> items = new ArrayList<>();
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
-
-    public void setPayment(Payment payment) {
-
-        if(payment != null){
-            payment.setOrder(this);
-            payment.setAmount(this.totalPrice);
-        }
-        this.payment = payment;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
 
     @PrePersist
     protected void onCreate() {
