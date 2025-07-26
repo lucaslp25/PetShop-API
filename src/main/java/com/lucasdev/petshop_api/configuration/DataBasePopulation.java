@@ -10,6 +10,7 @@ import com.lucasdev.petshop_api.security.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
@@ -87,10 +88,11 @@ public class DataBasePopulation implements CommandLineRunner {
 
         productRepository.saveAll(List.of(p1, p2, p3) );
 
-        PetShopService pss = new PetShopService(null, "Fast Shower", ServiceType.BATH_AND_GROOMING, BigDecimal.valueOf(158.80));
+        PetShopService pss1 = new PetShopService(null, "Fast Shower", ServiceType.BATH_AND_GROOMING, BigDecimal.valueOf(158.80));
 
-        petShopServiceRepository.saveAll(List.of(pss));
+        PetShopService pss2 = new PetShopService(null, "Morining training", ServiceType.TRAINING, BigDecimal.valueOf(71.84));
 
+        petShopServiceRepository.saveAll(List.of(pss1, pss2));
     }
 
 }

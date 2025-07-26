@@ -9,7 +9,7 @@ import java.util.UUID;
 public class FakeTestPayment implements PaymentGateway {
 
     @Override
-    public PaymentResultDTO paymentProcess(Payment payment) {
+    public PreferenceCreationResultDTO paymentProcess(Payment payment) {
 
         System.out.println("--- PAYMENT GATEWAY ---");
         System.out.println("Processing payment of: " + payment.getAmount());
@@ -24,6 +24,6 @@ public class FakeTestPayment implements PaymentGateway {
         String fakeTransactionId = "transaction " + UUID.randomUUID().toString();
         String message = "Payment processed successfully!";
 
-        return new PaymentResultDTO(success, fakeTransactionId, message);
+        return new PreferenceCreationResultDTO(success, fakeTransactionId, message);
     }
 }

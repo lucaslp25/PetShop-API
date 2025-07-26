@@ -16,10 +16,11 @@ public record SaleResponseDTO(
         CustomerInfoDTO customer,
         EmployeeInfoDTO employee,
         List<OrderItemResponseDTO> products,
-        List<PetShopOrderServiceResponseDTO> petShop_services
+        List<PetShopOrderServiceResponseDTO> petShop_services,
+        String paymentUrl
 ) {
 
-    public SaleResponseDTO(Sale entity){
+    public SaleResponseDTO(Sale entity, String paymentUrl) {
 
         this(
                 entity.getId(),
@@ -37,7 +38,30 @@ public record SaleResponseDTO(
 
                 entity.getServiceOrders().stream().
                         map(PetShopOrderServiceResponseDTO::new).
-                        collect(Collectors.toList())
+                        collect(Collectors.toList()), paymentUrl
                 );
+    }
+
+    public SaleResponseDTO(Sale entity){
+
+        this(
+                entity.getId(),
+                entity.getDate(),
+                entity.getTotalAmount(),
+
+                new PaymentResponseDTO(entity.getPayment()),
+
+                new CustomerInfoDTO(entity.getCustomer().getCustomerProfile()),
+                new EmployeeInfoDTO(entity.getEmployee().getEmployeeProfile()),
+
+                entity.getOrderItems().stream().
+                        map(OrderItemResponseDTO::new).
+                        collect(Collectors.toList()),
+
+                entity.getServiceOrders().stream().
+                        map(PetShopOrderServiceResponseDTO::new).
+                        collect(Collectors.toList()), null
+        );
+
     }
 }

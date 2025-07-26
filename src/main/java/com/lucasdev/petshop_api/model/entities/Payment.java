@@ -3,6 +3,7 @@ package com.lucasdev.petshop_api.model.entities;
 import com.lucasdev.petshop_api.model.enums.PaymentMode;
 import com.lucasdev.petshop_api.model.enums.PaymentStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -39,4 +40,16 @@ public class Payment implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_id", referencedColumnName = "id")
     private Sale sale;
+
+    @Column(name = "gateway_payment_id") //need this for ExternalServices
+    private String gatewayPaymentId;
+
+    public Payment(Instant date, BigDecimal amount, PaymentMode paymentMode, PaymentStatus status, Sale sale, String gatewayPaymentId) {
+        this.date = date;
+        this.amount = amount;
+        this.paymentMode = paymentMode;
+        this.status = status;
+        this.sale = sale;
+        this.gatewayPaymentId = gatewayPaymentId;
+    }
 }

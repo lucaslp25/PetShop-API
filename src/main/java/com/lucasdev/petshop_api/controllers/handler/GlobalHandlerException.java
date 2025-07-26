@@ -1,6 +1,7 @@
 package com.lucasdev.petshop_api.controllers.handler;
 
 import com.lucasdev.petshop_api.exceptions.PetShopIntegrityException;
+import com.lucasdev.petshop_api.exceptions.PetShopSaleException;
 import com.lucasdev.petshop_api.exceptions.ResourceNotFoundException;
 import com.lucasdev.petshop_api.security.exceptions.PetShopLoginException;
 import com.lucasdev.petshop_api.security.exceptions.PetShopSecurityException;
@@ -64,4 +65,18 @@ public class GlobalHandlerException {
         return new ResponseEntity<>(err, status);
     }
 
+
+    @ExceptionHandler(PetShopSaleException.class)
+    public ResponseEntity<StandardError> petShopSaleException(PetShopSaleException ex, HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY; // code 422
+        String name = "PetShop Bussines Rules violation!";
+        String message = ex.getMessage();
+        String path = request.getRequestURI();
+
+        StandardError err = new StandardError(name, message, status, Instant.now(), path);
+        return new ResponseEntity<>(err, status);
+    }
+
 }
+

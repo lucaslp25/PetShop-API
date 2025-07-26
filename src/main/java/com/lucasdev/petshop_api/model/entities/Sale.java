@@ -52,7 +52,6 @@ public class Sale implements Serializable {
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PetShopOrderService> serviceOrders = new ArrayList<>();
 
-
     @PrePersist
     protected void onCreate() {
         date = Instant.now();

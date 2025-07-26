@@ -16,7 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/api/v1/auth")
 @RequiredArgsConstructor //dependency injection in another level than Autowired
 public class UserController {
 

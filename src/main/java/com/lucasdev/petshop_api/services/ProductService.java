@@ -1,11 +1,14 @@
 package com.lucasdev.petshop_api.services;
 
+import com.lucasdev.petshop_api.exceptions.PetShopSaleException;
 import com.lucasdev.petshop_api.exceptions.ResourceNotFoundException;
 import com.lucasdev.petshop_api.model.DTO.ProductCreateDTO;
 import com.lucasdev.petshop_api.model.DTO.ProductResponseDTO;
 import com.lucasdev.petshop_api.model.DTO.ProductUpdateDTO;
 import com.lucasdev.petshop_api.model.entities.Product;
 import com.lucasdev.petshop_api.repositories.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,8 @@ import java.util.stream.Collectors;
 public class ProductService {
 
     private final ProductRepository repository;
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductService.class);
 
     public ProductService(ProductRepository repository) {
         this.repository = repository;
@@ -87,5 +92,27 @@ public class ProductService {
         Product entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
 
         return entity;
+    }
+
+    @Transactional
+    public void decreaseStock(Long productId, Integer quantity){
+        logger.info("Decreasing stock for product ID {} by {} units.", productId, quantity);
+        //use my own method
+        Product product = findEntityById(productId);
+
+        if (product.getStock() < quantity){
+
+            throw new PetShopSaleException(
+                    "Critical error: Insufficient stock for product " + product.getName() +
+                            ". Required: " + quantity + ", Available: " + product.getStock()
+            );
+        }
+
+        product.setStock(product.getStock() - quantity);
+
+        repository.save(product);
+
+        logger.info("Successfully decreased the stock for product ID {}. New stock{}", productId, product.getStock());
+
     }
 }

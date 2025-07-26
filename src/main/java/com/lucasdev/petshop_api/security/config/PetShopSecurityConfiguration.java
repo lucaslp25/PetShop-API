@@ -14,6 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -22,10 +27,10 @@ public class PetShopSecurityConfiguration {
 
     private final PetShopFilter filter;
 
-    // Array for better organization of my public matchers
+    // Best Practice: Standardize all public routes with the API prefix.
     private static final String[] PUBLIC_MATCHERS = {
-            "/auth/login",
-            "/auth/register",
+            "/api/v1/auth/**", // Covers both /login and /register
+            "/api/v1/webhooks/**",
             "/v3/api-docs/**",
             "/swagger-ui.html",
             "/swagger-ui/**",
@@ -34,43 +39,47 @@ public class PetShopSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable()) // Correct for stateless, token-based APIs
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin())) // For H2 Console
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
 
-        return http.csrf(pet -> pet.disable())
-                //for my app, it´s better keep the csrf disabled, STATELESS APP
-
-                //config for my h2 can be seen
-                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
-
-                .sessionManagement(petSesh -> petSesh.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                //turning explicit than is a STATELESS program
-
-                .authorizeHttpRequests(pet -> pet
-                        //doing the business rules
-
+                        //keeping the DRY
                         .requestMatchers(PUBLIC_MATCHERS).permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/sales").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.POST, "/products").hasRole("EMPLOYEE").requestMatchers(HttpMethod.DELETE, "/products").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.PUT, "/products").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/sales").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/products").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/products").hasRole("EMPLOYEE")
 
-                        .anyRequest().authenticated())
-
+                        // Any other request not specified above requires authentication.
+                        .anyRequest().authenticated()
+                )
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
-
                 .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        // For production, it's better to specify the exact frontend domain instead of "*".
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
+        configuration.setAllowedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

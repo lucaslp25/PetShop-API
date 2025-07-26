@@ -1,6 +1,5 @@
 package com.lucasdev.petshop_api.model.DTO;
 
-import com.lucasdev.petshop_api.model.entities.Sale;
 import com.lucasdev.petshop_api.model.enums.PaymentMode;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,11 +24,5 @@ public record SaleCreateDTO(
         @NotNull(message = "The sale must have an paymentMode")
         PaymentMode paymentMode
 ){
-
-    public SaleCreateDTO(Sale entity, List<CreateOrderItemDTO> productsItemsEntity, List<CreatePetShopServiceDTO> serviceItemsEntity, Long petId) {
-
-        this(entity.getCustomer().getLogin(), entity.getEmployee().getLogin(), petId,productsItemsEntity, serviceItemsEntity, entity.getPayment().getPaymentMode());
-
-    }
 
 }
