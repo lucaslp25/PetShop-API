@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
     
 }
 
@@ -37,13 +38,28 @@ figure img{
 
 /* pego o container que tema lista dos links, independente se os anteriores ja tinham o display flex aqu também precisa ter */
 .links{
-    display: flex;
+    /*display: flex;*/
     list-style-type: none;   /*Tira o efeito de circulo da lisitnha*/
     margin: 0;
     padding: 0; /* Remove o preenchimento padrão da lista */
     gap: 1.5rem; /* Cria um espaço horizontal entre os links */
-    margin-left: auto; /*AQUII EU CONSIGO JOGAR TODOS OS ITEMS PARA ESQEURDA... BINGO*/
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+
+.header-content {
+    margin-left: auto;
+}
+
+.links ul {
+    display: flex;
+    gap: 1.5rem; /* O gap que estava no .links agora vem para a <ul> */
+    padding: 0;
+    margin: 0;
+}
+
 
 /* aqui eu pego o 'a' do link ao invés de aninha as tags */
 .links a{
@@ -120,21 +136,6 @@ footer{
     background-color: #fff;
     text-align: center;
     align-self: start;
-}
-
-.btn-main{
-    padding: 0.7rem;
-    background: #E07f00;
-    color: white;
-    border-radius: 1rem;
-    border-style: solid;
-    border-width: 0.2rem;
-    cursor: pointer;
-    transition: color 0.5s ease;
-}
-
-.btn-main:hover{
-    background: #ffae00;
 }
 
 main{
@@ -237,3 +238,107 @@ main{
 .menu-item.active .menu-toggle .arrow{
     transform: rotate(180deg);
 }
+
+
+
+.modal-overlay.active, .modal-content.active{
+    display: block;
+}
+
+.modal-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: none;
+}
+
+.modal-content{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+    background: white;
+    padding: 2.5rem;
+    display: none;
+    border-radius: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h2{
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-top: 0;
+}
+
+.form-group{
+    margin-bottom: 1rem;
+}
+
+.form-group label{
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input{
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-submit{
+    width: 100%;
+    padding: 1rem;
+    background-color: #E07f00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-close-modal{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.footer-text{
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.btn-login {
+    padding: 0.6rem 1.2rem;
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-login:hover {
+    background-color: white;
+    color: #E07f00;
+    transform: scale(1.05);
+}
+

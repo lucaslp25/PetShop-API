@@ -21,13 +21,20 @@
                 <div class="links">
                     <ul>
                         <l1><a href="">Home</a></l1>
-                        <l1><a href="">Serviços</a></l1>
-                        <l1><a href="">Configurações</a></l1>
+                        <l1><a href="">Services</a></l1>
+                        <l1><a href="">Configurations</a></l1>
                         <l1><a href="">Portfólio</a></l1>
                     </ul>
                 </div>
+
+                <div class="header-content">
+                    <button id="login-trigger-btn" class="btn-login">
+                        <i class="bi bi-person"></i>Enter / Register</button>
+
+                </div>
             </div>
         </nav>
+
     </header>
 
 
@@ -36,7 +43,7 @@
         <div class="main-container">
 
             <aside class="main-sidebar">
-                <h4>Options</h4>
+                <h4>PetShop Pane</h4>
 
                 <div class="action-menu">
                     <ul>
@@ -81,7 +88,6 @@
 
 
 
-
     <footer>
         <div class="footer-container">
 
@@ -107,6 +113,27 @@
         </div>
     </footer>
 
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content" id="modal-content">
+            <button class="btn-close-modal" id="btn-close-modal">&times;</button>  <!--the x button-->
+            <h2>Account Access</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn-submit">Enter</button>
+                <p class="footer-text">Don´t have an account? <a href="#" id="show-register">Click here for register</a></p>
+            </form>
+        </div>
+    </div>
+
     <script src="/js/product.js"></script>
+    <script src="/js/login.js"></script>
 </body>
 </html>
