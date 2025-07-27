@@ -34,7 +34,12 @@ public class PetShopSecurityConfiguration {
             "/v3/api-docs/**",
             "/swagger-ui.html",
             "/swagger-ui/**",
-            "/h2-console/**"
+            "/h2-console/**",
+            "/assets/**",
+            "/css/**",
+            "/js/**",
+            "/images/**",
+            "/index.html"
     };
 
     @Bean
@@ -49,6 +54,7 @@ public class PetShopSecurityConfiguration {
                         //keeping the DRY
                         .requestMatchers(PUBLIC_MATCHERS).permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/api/v1/products").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/sales").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "/api/v1/products").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/products").hasRole("EMPLOYEE")

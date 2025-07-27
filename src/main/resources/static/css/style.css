@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.nav-section{
+    background: linear-gradient( #E07f00, #ffae00);
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  
+}
+
+.nav-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+
+figure {
+    margin: 0; /* Remove margens padrão que podem atrapalhar o alinhamento */
+}
+
+figure img{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 4rem;
+    display: block;
+    border: 0.3rem solid white; /*Junta todas propriedades de borda em uma só*/
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+   
+    /* display block para evitar espaçamentos extras aqui */
+
+}
+
+/* Alinhamento dos links agora.. */
+
+/* pego o container que tema lista dos links, independente se os anteriores ja tinham o display flex aqu também precisa ter */
+.links{
+    display: flex;
+    list-style-type: none;   /*Tira o efeito de circulo da lisitnha*/
+    margin: 0;
+    padding: 0; /* Remove o preenchimento padrão da lista */
+    gap: 1.5rem; /* Cria um espaço horizontal entre os links */
+    margin-left: auto; /*AQUII EU CONSIGO JOGAR TODOS OS ITEMS PARA ESQEURDA... BINGO*/
+}
+
+/* aqui eu pego o 'a' do link ao invés de aninha as tags */
+.links a{
+
+    color:white;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    /* padding: 3.5rem; */
+    /* margin: 0.5rem; */
+
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease; /*pequena animação no hover*/
+
+}
+
+.links a:hover{
+    color: rgb(0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+footer{
+    background-color: #000000;
+    color: #ffffff;
+    padding: 2rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;    
+}
+
+
+.contact-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-container a, ul{
+    text-decoration: none;
+    list-style-type: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.footer-container a:hover{
+    color: rgb(41, 73, 255);
+}
+
+.icons-container i {
+    font-size: 1.5rem; /* Aumenta um pouco o tamanho do ícone */
+    margin-right: 0.5rem; /* Cria um espaço entre o ícone e o texto */
+    vertical-align: middle; /* Alinha o ícone verticalmente com o texto ao lado */
+}
+
+/*=====*/
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: 250px;
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    background-color: #fff;
+    text-align: center;
+    align-self: start;
+}
+
+.btn-main{
+    padding: 0.7rem;
+    background: #E07f00;
+    color: white;
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: 0.2rem;
+    cursor: pointer;
+    transition: color 0.5s ease;
+}
+
+.btn-main:hover{
+    background: #ffae00;
+}
+
+main{
+    background: linear-gradient(rgba(0, 0, 0, 0.705), rgba(48, 48, 48, 0.795)), url('/assets/petshop_backimage.jpg');
+    min-height: 100vh;
+    background-size: cover; /*Faz a tela de fundo ficar proporcional */
+    /* background-position: center; */
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+    padding: 1.5rem;
+}
+
+.main-sidebar{
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    padding: 1.5rem;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+
+    position: sticky;
+    top: 20px; /*will be fix in this position*/
+    align-self: start; /*Make not long when don´t necessary*/
+
+}
+
+.main-sidebar h4 {
+    margin-top: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.action-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.action-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.action-menu button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    text-align: left;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-menu button:hover {
+    background-color: #E07f00;
+    border-color: #E07f00;
+}
+
+.menu-toggle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.menu-toggle .arrow{
+    transition: transform 0.3s ease;
+}
+
+.sub-menu{
+    list-style: none;
+    padding-left: 1.5rem;
+    overflow: hidden; /*important this... make the content not get out of limit*/
+    max-height: 0;
+    transition: max-height 0.4s ease-in-out;
+}
+
+.sub-menu a{
+    display: block;
+    padding: 0.6rem 0;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s ease;
+}
+
+.sub-menu a:hover{
+    color: #E07f00;
+}
+
+.menu-item.active .sub-menu{
+    max-height: 200px;
+}
+
+.menu-item.active .menu-toggle .arrow{
+    transform: rotate(180deg);
+}
