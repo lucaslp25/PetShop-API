@@ -7,7 +7,6 @@
     background: linear-gradient( #E07f00, #ffae00);
     padding: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  
 }
 
 .nav-content{
@@ -15,11 +14,12 @@
     flex-direction: row;
     align-items: center;
     position: relative;
-    
+    flex-shrink: 0;
 }
 
 figure {
     margin: 0; /* Remove margens padrão que podem atrapalhar o alinhamento */
+    flex-shrink: 0;
 }
 
 figure img{
@@ -38,7 +38,7 @@ figure img{
 
 /* pego o container que tema lista dos links, independente se os anteriores ja tinham o display flex aqu também precisa ter */
 .links{
-    /*display: flex;*/
+    display: flex;
     list-style-type: none;   /*Tira o efeito de circulo da lisitnha*/
     margin: 0;
     padding: 0; /* Remove o preenchimento padrão da lista */
@@ -46,6 +46,8 @@ figure img{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    flex-shrink: 1;
+    flex-wrap: wrap;
 }
 
 
@@ -53,11 +55,15 @@ figure img{
     margin-left: auto;
 }
 
+
+
 .links ul {
     display: flex;
     gap: 1.5rem; /* O gap que estava no .links agora vem para a <ul> */
     padding: 0;
     margin: 0;
+    flex-shrink: 1;
+    flex-wrap: wrap;
 }
 
 
@@ -69,10 +75,12 @@ figure img{
     font-family: Arial, Helvetica, sans-serif;
     /* padding: 3.5rem; */
     /* margin: 0.5rem; */
+    flex-shrink: 1;
 
     padding: 0.5rem 1rem;
     border-radius: 5px;
     transition: color 0.3s ease, background-color 0.3s ease; /*pequena animação no hover*/
+    flex-wrap: wrap;
 
 }
 
@@ -232,7 +240,7 @@ main{
 }
 
 .menu-item.active .sub-menu{
-    max-height: 200px;
+    max-height: 750px;
 }
 
 .menu-item.active .menu-toggle .arrow{
@@ -340,5 +348,29 @@ main{
     background-color: white;
     color: #E07f00;
     transform: scale(1.05);
+}
+
+.admin-only{
+    display: none;
+}
+/*take the container thought the id*/
+#user-salutation {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#user-salutation span {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    font-family: Helvetica;
+    flex-shrink: 1;
+}
+
+.header-content {
+    margin-left: auto;
+    display: flex;
 }
 

@@ -1,5 +1,6 @@
 package com.lucasdev.petshop_api.security.controller;
 
+import com.lucasdev.petshop_api.model.DTO.LoginResponseDTO;
 import com.lucasdev.petshop_api.security.model.DTO.RegisterResponseDTO;
 import com.lucasdev.petshop_api.security.model.DTO.TokenDTO;
 import com.lucasdev.petshop_api.security.model.DTO.UserLoginDTO;
@@ -23,9 +24,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping(value = "/login")
-    public ResponseEntity<TokenDTO> login(@RequestBody UserLoginDTO dtoRef) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody UserLoginDTO dtoRef) {
 
-        TokenDTO dto = userService.login(dtoRef);
+        LoginResponseDTO dto = userService.login(dtoRef);
 
         return ResponseEntity.ok().body(dto); //code 200 here think is more semantic
     }

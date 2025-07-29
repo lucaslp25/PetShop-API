@@ -63,15 +63,20 @@ public class DataBasePopulation implements CommandLineRunner {
         Employee employee2 = new Employee(null, "Bob", "bob@email.com", "99887766555", "55566677788");
         userEmployee2.setEmployeeProfile(employee2);
 
+        User userEmployee3 = new User(null, "lucas@gmail.com", pass, UserRole.EMPLOYEE, null, null);
+        Employee employee3 = new Employee(null, "Lucas", "lucas@gmail.com", "98765432100", "11122233444");
+        userEmployee3.setEmployeeProfile(employee3);
+
+
         User userCustomer1 = new User(null, "lucas.customer", pass, UserRole.CUSTOMER, null, null);
-        Customer customer1 = new Customer(null, "Lucas", "lucas@gmail.com", "99999999999", "12345678910");
+        Customer customer1 = new Customer(null, "Lucas", "lucas5@gmail.com", "99999999999", "12345678910");
         userCustomer1.setCustomerProfile(customer1);
 
         User userCustomer2 = new User(null, "fulano.customer", pass, UserRole.CUSTOMER, null, null);
         Customer customer2 = new Customer(null, "Fulano", "fulano@gmail.com", "51999999999", "12345678911");
         userCustomer2.setCustomerProfile(customer2);
 
-        userRepository.saveAll(List.of(userEmployee1, userEmployee2, userCustomer1, userCustomer2));
+        userRepository.saveAll(List.of(userEmployee1, userEmployee2, userCustomer1, userCustomer2, userEmployee3));
 
 
         //a little change here too

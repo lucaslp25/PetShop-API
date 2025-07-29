@@ -20,10 +20,10 @@
 
                 <div class="links">
                     <ul>
-                        <l1><a href="">Home</a></l1>
-                        <l1><a href="">Services</a></l1>
-                        <l1><a href="">Configurations</a></l1>
-                        <l1><a href="">Portfólio</a></l1>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Services</a></li>
+                        <li><a href="">Configurations</a></li>
+                        <li><a href="">Portfólio</a></li>
                     </ul>
                 </div>
 
@@ -56,7 +56,9 @@
                             <ul class="sub-menu">
                                 <li><button id="btn-list-products" class="btn-main">See All Products</button></li>
                                 <li><button>Find By Name</button></li>
-                                <li><button>Insert new</button></li>
+                                <li><button class="admin-only">Insert new</button></li>
+                                <li><button class="admin-only">Delete Product</button></li>
+                                <li><button class="admin-only">Update Product</button></li>
                             </ul>
                         </li>
                         <li class="menu-item">
@@ -66,14 +68,33 @@
                             </button>
 
                                 <ul class="sub-menu">
-                                    <li><button>UNDEFINED</button></li>
+                                    <li><button>My Cart</button></li>
+                                    <li><button class="admin-only">See All Clients</button></li>
+                                    <li><button class="admin-only">Find Client</button></li>
+                                    <li><button class="admin-only">Update Client</button></li>
+                                    <li><button class="admin-only">Delete Client</button></li>
                                 </ul>
                         </li>
-                        <li class="action-menu">
+                        <li class="menu-item">
                             <button class="menu-toggle">
                                 <i class="bi bi-three-dots"></i><span>Services</span>
                                 <i class="bi bi-chevron-down arrow"></i>
                             </button>
+
+                            <ul class="sub-menu">
+                                <li><button>See all</button></li>
+                                <li><button>Grooming</button></li>
+                                <li><button>Hydratation</button></li>
+                                <li><button>Veterinary Consultation</button></li>
+                                <li><button>Accomodation</button></li>
+                                <li><button>Training</button></li>
+                                <li><button>Vaccination</button></li>
+
+                                <li><button class="admin-only">Find By Name</button></li>
+                                <li><button class="admin-only">Update service</button></li>
+                                <li><button class="admin-only">Delete Service</button></li>
+
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -133,6 +154,7 @@
         </div>
     </div>
 
+    <script src="/js/main.js"></script>
     <script src="/js/product.js"></script>
     <script src="/js/login.js"></script>
 </body>

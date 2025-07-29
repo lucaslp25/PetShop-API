@@ -2,6 +2,7 @@ package com.lucasdev.petshop_api.security.services;
 
 
 import com.lucasdev.petshop_api.exceptions.ResourceNotFoundException;
+import com.lucasdev.petshop_api.model.DTO.LoginResponseDTO;
 import com.lucasdev.petshop_api.security.exceptions.PetShopLoginException;
 import com.lucasdev.petshop_api.security.exceptions.PetShopSecurityException;
 import com.lucasdev.petshop_api.security.model.DTO.*;
@@ -46,13 +47,13 @@ public class UserService {
 
         user = repository.save(user);
 
-        String message = "Register Successfully!\nPut your login in another endpoint for take authorization";
+        String message = "Register Successfully! Put your login in another endpoint for take authorization";
 
         return new RegisterResponseDTO(user, message);
     }
 
     @Transactional
-    public TokenDTO login(UserLoginDTO dtoRef){
+    public LoginResponseDTO login(UserLoginDTO dtoRef){
 
         if (dtoRef.username() == null || dtoRef.password() == null){
             throw new PetShopLoginException("Error in make register of username: one or more fields empty");
@@ -62,9 +63,24 @@ public class UserService {
 
         var auth = authenticationManager.authenticate(pass);
 
-        String token = tokenService.generateToken((User) auth.getPrincipal());
+        var authenticatedUser = (User) auth.getPrincipal();
 
-        return new TokenDTO(token);
+        String token = tokenService.generateToken(authenticatedUser);
+
+        String name = null;
+        String email = null;
+
+        if (authenticatedUser.getAuthorities().contains(UserRole.CUSTOMER)){
+
+            name = authenticatedUser.getCustomerProfile().getName();
+            email = authenticatedUser.getCustomerProfile().getEmail();
+
+        }else {
+            name = authenticatedUser.getEmployeeProfile().getName();
+            email = authenticatedUser.getEmployeeProfile().getEmail();
+
+        }
+        return new LoginResponseDTO(token, name, email, authenticatedUser.getRole().getRole());
     }
 
     @Transactional(readOnly = true)
