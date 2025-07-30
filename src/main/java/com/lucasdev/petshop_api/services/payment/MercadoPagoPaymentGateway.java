@@ -11,6 +11,7 @@ import com.mercadopago.client.preference.PreferenceRequest;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.preference.Preference;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,9 @@ import java.util.List;
 @Primary //using this annotation because the interface have more than one implementation, then we say to spring give preference to this
 public class MercadoPagoPaymentGateway implements PaymentGateway {
 
+
+    @Value("${app.base-url}")
+    private String urlTest;
     private final PaymentRepository paymentRepository;
 
     public MercadoPagoPaymentGateway(PaymentRepository paymentRepository) {
@@ -63,17 +67,19 @@ public class MercadoPagoPaymentGateway implements PaymentGateway {
                 });
             }
 
+
             //now we make the ways for each payment status result
             PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                    .success("http://localhost:8080/success") //way for success, fail, and pending
-                    .failure("http://localhost:8080/failure")
-                    .pending("http://localhost:8080/pending")
+                    .success(urlTest + "/html/success-payment.html") //way for success, fail, and pending
+                    .failure(urlTest + "/html/failure-payment.html")
+                    .pending(urlTest + "/html/pending-payment.html")
                     .build();
 
             PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                     .items(items) //add my list of items
                     .backUrls(backUrls) //add the backUrls
                     //create the link of MP Payment and my sale
+                    .autoReturn("approved")
                     .externalReference(payment.getSale().getId().toString())
                     .build();
 

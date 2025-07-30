@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import org.eclipse.sisu.Nullable;
 
 import java.math.BigDecimal;
 
@@ -21,12 +22,14 @@ public record ProductCreateDTO(
         @Positive(message = "The price must be positive")
         BigDecimal price,
 
+        @Nullable
+        String imageUrl,
+
         Integer stock
 ) {
 
     public ProductCreateDTO(Product entity) {
-        this(entity.getName(), entity.getDescription(), entity.getPrice(), entity.getStock());
+        this(entity.getName(), entity.getDescription(), entity.getPrice(), entity.getImageUrl(), entity.getStock());
     }
+
 }
-
-

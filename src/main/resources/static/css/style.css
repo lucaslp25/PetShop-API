@@ -130,21 +130,6 @@ footer{
 
 /*=====*/
 
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.card {
-    width: 250px;
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.2);
-    background-color: #fff;
-    text-align: center;
-    align-self: start;
-}
 
 main{
     background: linear-gradient(rgba(0, 0, 0, 0.705), rgba(48, 48, 48, 0.795)), url('/assets/petshop_backimage.jpg');
@@ -253,7 +238,7 @@ main{
     display: block;
 }
 
-.modal-overlay{
+.modal-overlay, .cart-modal-overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -374,3 +359,161 @@ main{
     display: flex;
 }
 
+.card-img-item img{
+    width: 100px;
+    border-radius: 1rem;
+    border: 2px solid black;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-shrink: 1;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    padding: 16px;
+    border-radius: 15px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    background-color: #fff;
+    text-align: center;
+    align-self: start;
+    gap: 0.7rem;
+    transition: all 0.5s ease;
+    font-family: Arial;
+    flex-shrink: 1;
+}
+
+.card:hover{
+    background-color: #e8e8e8;
+    transform: scale(1.02);
+}
+
+.cart-actions{
+
+}
+
+.btn-add-to-cart{
+    padding: 0.6rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ffae00;
+    font-family: Helvetica;
+    color: #000000;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.btn-add-to-cart:hover{
+    background-color: #ffa835;
+    color: white;
+    transform: scale(1.05);
+}
+
+.cart-modal-overlay.active{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-modal{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-radius: 5px;
+    background-color: #ffae00;
+    box-shadow: 0 0 8px rgba(0,0,0,0.4);
+    padding: 1.5rem;
+}
+
+.cart-modal h2{
+    justify-content: center;
+    text-align: center;
+    color: white;
+    font-family: Arial;
+    font-size: 2rem;
+}
+.cart-content{
+
+}
+
+.buy-items{
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0.6rem;
+    background-color: #ffb011;
+    color: #000000;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.buy-items:hover{
+    color: white;
+    background-color: #ffaa05;
+}
+
+.cart-item-img{
+    width: 50px;
+    border-radius: 1rem;
+}
+
+#cart-container {
+    position: relative;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+#cart-icon {
+    font-size: 1.8rem;
+    color: white;
+}
+
+#cart-counter {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+#modal-overlay-cart {
+}
+
+#modal-content-cart {
+    max-width: 600px;
+}
+
+.cart-items-list {
+    min-height: 150px;
+    max-height: 400px;
+    overflow-y: auto; /*scroll bar*/
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+}
+
+.cart-summary {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+}
+
+.cart-checkout {
+    margin-top: 1.5rem;
+}
+
+/*After i will separate all this code*/

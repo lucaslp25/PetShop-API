@@ -32,6 +32,9 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(nullable = true) //optional
+    private String imageUrl;
+
     @Column(nullable = true)
     private Integer stock;
 
@@ -44,6 +47,16 @@ public class Product implements Serializable {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.stock = stock;
+    }
+
+    @Builder
+    public Product(Long id, String name, String description, BigDecimal price, String imageUrl, Integer stock) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imageUrl = imageUrl;
         this.stock = stock;
     }
 }

@@ -32,7 +32,7 @@ addEventListener('DOMContentLoaded', ()=>{
 
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        console.log('Data colected: ', email, password)
+        console.log('Data collected: ', email, password)
 
         try{
             const response = await fetch('http://localhost:8080/api/v1/auth/login', {

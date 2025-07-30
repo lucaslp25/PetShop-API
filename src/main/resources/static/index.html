@@ -30,7 +30,10 @@
                 <div class="header-content">
                     <button id="login-trigger-btn" class="btn-login">
                         <i class="bi bi-person"></i>Enter / Register</button>
-
+                </div>
+                <div id="cart-container">
+                    <i class="bi bi-cart" id="cart-icon"></i>
+                    <span id="cart-counter">0</span>
                 </div>
             </div>
         </nav>
@@ -68,7 +71,6 @@
                             </button>
 
                                 <ul class="sub-menu">
-                                    <li><button>My Cart</button></li>
                                     <li><button class="admin-only">See All Clients</button></li>
                                     <li><button class="admin-only">Find Client</button></li>
                                     <li><button class="admin-only">Update Client</button></li>
@@ -95,6 +97,19 @@
                                 <li><button class="admin-only">Delete Service</button></li>
 
                             </ul>
+                        </li>
+
+                        <li class="menu-item">
+                            <button class="menu-toggle">
+                                <i class="bi bi-cart-plus"></i><span>My Cart</span>
+                                <i class="bi bi-chevron-down arrow"></i>
+                            </button>
+
+                            <ul class="sub-menu">
+                                <li><button id="my-cart-items">My Items</button></li>
+                                <li><button id="direct-payment-btn">Payment</button></li>
+                            </ul>
+
                         </li>
                     </ul>
                 </div>
@@ -137,7 +152,7 @@
 
     <div class="modal-overlay" id="modal-overlay">
         <div class="modal-content" id="modal-content">
-            <button class="btn-close-modal" id="btn-close-modal">&times;</button>  <!--the x button-->
+            <button class="btn-close-modal" id="btn-close-modal">&times;</button>
             <h2>Account Access</h2>
             <form id="login-form">
                 <div class="form-group">
@@ -154,8 +169,26 @@
         </div>
     </div>
 
+
+    <div class="modal-overlay" id="modal-overlay-cart">
+        <div class="modal-content" id="modal-content-cart">
+            <button class="btn-close-modal" id="btn-close-modal-cart">&times;</button>
+            <h2>Seu Carrinho</h2>
+            <div class="cart-items-list" id="cart-items-list">
+            </div>
+            <div class="cart-summary">
+                <strong>Total:</strong>
+                <span id="cart-total">R$ 0,00</span>
+            </div>
+            <div class="cart-checkout">
+                <button class="btn-submit" id="btn-checkout">Finalizar Compra e Pagar</button>
+            </div>
+        </div>
+    </div>
+
     <script src="/js/main.js"></script>
     <script src="/js/product.js"></script>
     <script src="/js/login.js"></script>
+    <script src="/js/sale.js"></script>
 </body>
 </html>

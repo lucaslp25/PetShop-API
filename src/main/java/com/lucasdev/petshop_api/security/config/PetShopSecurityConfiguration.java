@@ -38,8 +38,10 @@ public class PetShopSecurityConfiguration {
             "/assets/**",
             "/css/**",
             "/js/**",
+            "/html/**",
             "/images/**",
-            "/index.html"
+            "/index.html",
+            "/"
     };
 
     @Bean

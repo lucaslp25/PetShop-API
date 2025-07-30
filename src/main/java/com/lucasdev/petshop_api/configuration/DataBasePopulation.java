@@ -87,7 +87,7 @@ public class DataBasePopulation implements CommandLineRunner {
 
         petRepository.saveAll(List.of(pet1, pet2, pet3));
 
-        Product p1 = new Product(null, "Golden Dog Food", "Golden brand dog food for adult dogs, chicken and rice flavor, 15kg bag.", new BigDecimal("150.00"), 50);
+        Product p1 = new Product(null, "Golden Dog Food", "Golden brand dog food for adult dogs, chicken and rice flavor, 15kg bag.", new BigDecimal("150.00"), "https://images.unsplash.com/photo-1647616350787-6428e907a7fa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHJhJUMzJUE3JUMzJUEzbyUyMGRlJTIwY2FjaG9ycm98ZW58MHx8MHx8fDA%3D", 50);
         Product p2 = new Product(null, "Durable Chew Toy", "Durable chew toy for medium-sized dogs, helps with dental hygiene.", new BigDecimal("35.50"), 100);
         Product p3 = new Product(null, "Flea & Tick Collar", "Collar for dogs and cats, provides up to 8 months of protection against fleas and ticks.", new BigDecimal("89.90"), 30);
 
